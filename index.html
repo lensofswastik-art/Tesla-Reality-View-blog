@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tesla Reality View, decoded — happening</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+/* VOICE: a Happening journal teardown — confident, plain, design-first, honest caveats.
+   IDEA: an engineer's blueprint of a car screen, printed on Happening's warm paper.
+   PICTURE: the Reality View screen drawn as an annotated illustration inside a cream card.
+   COLOUR and TYPE: Happening tokens — deep void ink, happening blue, neutral light cream; Instrument Sans + Space Mono labels.
+   LAYOUT: 680px reading column, figures break wide to 1040px, cream band for lessons, cream CTA, studio footer. */
+:root{color-scheme:light;
+--sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"Space Mono",ui-monospace,Menlo,monospace;
+--void:#050a14;--blue:#2881e7;--navy:#25478d;--cream:#fff5e1;--shade:#e5d3b3;--sand:#f7ecd5;--sage:#e6eed6;--amber:#ffa630;
+--bg:#ffffff;--ink:var(--void);--body:rgba(5,10,20,.72);--mute:rgba(5,10,20,.55);--line:rgba(5,10,20,.08);--paper:#fffbf3;
+--sh-sm:0 1px 2px rgba(5,10,20,.04),0 2px 6px rgba(5,10,20,.04);
+--sh:0 1px 2px rgba(5,10,20,.04),0 10px 28px -10px rgba(5,10,20,.14);
+--sh-lg:0 2px 4px rgba(5,10,20,.04),0 30px 60px -24px rgba(5,10,20,.28);
+--ease:cubic-bezier(.2,.8,.2,1)}
+*{box-sizing:border-box;min-width:0}
+html{scroll-padding-top:110px;scroll-behavior:smooth;background:#fff}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 18px/1.67 var(--sans);overflow-x:clip;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.wrap{max-width:1200px;margin:0 auto;padding:0 max(5vw,16px)}
+.col{max-width:680px;margin:0 auto}.wide{max-width:1040px;margin:0 auto}
+/* announcement + nav */
+.ann{background:var(--void);color:#fff;font-size:13px;text-align:center;padding:9px 16px}
+.ann b{font-weight:500}.ann span{color:var(--blue)}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px clamp(16px,2.6vw,50px)}
+.logo{display:inline-flex;color:var(--blue);text-decoration:none}.logo svg{height:24px;width:auto;display:block}
+.links{display:flex;gap:36px;font-size:14px;font-weight:500}.links a{text-decoration:none;transition:opacity .2s}.links a:hover{opacity:.6}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 22px;border-radius:999px;background:var(--blue);color:#fff;font:500 14px var(--sans);text-decoration:none;border:0;cursor:pointer;transition:transform .3s var(--ease),box-shadow .3s var(--ease),background .3s}
+.btn:hover{transform:translateY(-1px);box-shadow:0 10px 24px -10px rgba(40,129,231,.7)}
+.btn.dark{background:var(--void)}.btn.dark:hover{box-shadow:0 10px 24px -10px rgba(5,10,20,.6)}
+/* hero */
+.back{display:inline-flex;gap:10px;margin:44px 0 28px;text-decoration:none;transition:color .2s}.back:hover{color:var(--ink)}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 26px;padding:0;list-style:none}
+.tags li{background:var(--sand);border-radius:999px;padding:6px 14px;font-size:13px;font-weight:500}
+h1{font-size:clamp(38px,5.6vw,68px);line-height:1.04;letter-spacing:-.035em;font-weight:600;margin:0;max-width:16ch;text-wrap:balance}
+.meta{margin:26px 0 0;display:flex;gap:20px;flex-wrap:wrap}
+.lead{font-size:21px;line-height:1.55;color:var(--body);max-width:720px;margin:22px 0 0}
+.herocard{position:relative;margin:48px 0 0;background:var(--cream);border-radius:28px;padding:clamp(22px,4vw,52px);display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:clamp(22px,3.4vw,56px);align-items:center;overflow:hidden;isolation:isolate}
+.herocard::before{content:"";position:absolute;inset:0;z-index:-1;background-image:radial-gradient(rgba(5,10,20,.11) 1px,transparent 1.3px);background-size:14px 14px;-webkit-mask-image:linear-gradient(100deg,#000 0%,rgba(0,0,0,.25) 55%,transparent 80%);mask-image:linear-gradient(100deg,#000 0%,rgba(0,0,0,.25) 55%,transparent 80%)}
+.herocard::after{content:"";position:absolute;z-index:-1;right:-10%;top:-30%;width:70%;aspect-ratio:1;border-radius:50%;border:1px solid rgba(5,10,20,.07);box-shadow:0 0 0 70px rgba(255,255,255,.18),0 0 0 71px rgba(5,10,20,.05)}
+.herocard blockquote{margin:0;font-size:clamp(32px,3.8vw,50px);line-height:1.04;letter-spacing:-.035em;font-weight:600}
+.herocard blockquote+.mono{display:block;margin:14px 0 24px}
+.legend{list-style:none;margin:0;padding:0;display:grid;gap:4px;font-size:14.5px;line-height:1.4;color:var(--body)}
+.legend li{display:grid;grid-template-columns:26px minmax(0,1fr);gap:10px;align-items:start;padding:8px 10px;border-radius:12px;cursor:default;transition:background .25s,box-shadow .25s}
+.legend li:hover,.legend li.hot{background:rgba(255,255,255,.75);box-shadow:var(--sh-sm)}
+.dot{width:24px;height:24px;border-radius:50%;background:var(--blue);color:#fff;font:600 12px/24px var(--sans);text-align:center;box-shadow:0 4px 10px -4px rgba(40,129,231,.8)}
+.legend b{color:var(--ink);font-weight:600}
+.screen{position:relative}
+.screen svg{width:100%;height:auto;display:block;filter:drop-shadow(0 30px 40px rgba(5,10,20,.22)) drop-shadow(0 4px 8px rgba(5,10,20,.10))}
+.pin{cursor:pointer}.pin .ring{transform-box:fill-box;transform-origin:center;animation:pulse 2.6s var(--ease) infinite}
+.pin:hover circle.c,.pin.hot circle.c{fill:#fff}.pin:hover text,.pin.hot text{fill:var(--blue)}
+@keyframes pulse{0%{transform:scale(.7);opacity:.7}80%,100%{transform:scale(1.9);opacity:0}}
+.cap{display:flex;gap:4px 12px;flex-wrap:wrap;margin:16px 0 0}.cap code{font:12px var(--mono);color:var(--ink);letter-spacing:0;text-transform:none}
+/* floating section pill */
+.toc{position:sticky;top:14px;z-index:20;display:flex;justify-content:center;margin:56px auto 0;padding:0 16px;pointer-events:none}
+.toc .scroll{pointer-events:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;padding:6px;border-radius:999px;background:rgba(255,255,255,.78);-webkit-backdrop-filter:blur(16px) saturate(1.5);backdrop-filter:blur(16px) saturate(1.5);border:1px solid var(--line);box-shadow:var(--sh)}
+.toc .scroll::-webkit-scrollbar{display:none}
+.toc a{flex:none;white-space:nowrap;font-size:13.5px;font-weight:500;text-decoration:none;padding:8px 14px;border-radius:999px;color:var(--body);transition:background .35s var(--ease),color .35s var(--ease)}
+.toc a:hover{color:var(--ink);background:rgba(5,10,20,.04)}
+.toc a.on{background:var(--void);color:#fff}
+/* article */
+article{padding:16px 0 40px}
+article h2{font-size:clamp(26px,3vw,34px);line-height:1.1;letter-spacing:-.025em;font-weight:600;margin:96px 0 18px;text-wrap:balance}
+article h3{font-size:21px;line-height:1.3;letter-spacing:-.015em;font-weight:600;margin:40px 0 10px}
+article p,article li{color:var(--body)}
+article p{margin:0 0 20px}
+article strong{color:var(--ink);font-weight:600}
+article a{text-decoration-color:rgba(40,129,231,.45);text-underline-offset:3px;transition:color .2s,text-decoration-color .2s}
+article a:hover{color:var(--blue);text-decoration-color:var(--blue)}
+.pull{font-size:clamp(24px,2.7vw,32px);line-height:1.2;letter-spacing:-.025em;font-weight:600;color:var(--ink);margin:44px 0;padding:28px 30px;background:var(--cream);border-radius:22px;position:relative}
+.pull::before{content:"";position:absolute;left:30px;top:-6px;width:40px;height:12px;border-radius:6px;background:var(--blue)}
+figure,figure.col,figure.wide{margin:48px auto 60px}
+.print{position:relative;background:var(--paper);border:1px solid rgba(229,211,179,.7);border-radius:24px;padding:clamp(16px,3vw,32px);box-shadow:var(--sh-sm);
+ background-image:linear-gradient(rgba(229,211,179,.38) 1px,transparent 1px),linear-gradient(90deg,rgba(229,211,179,.38) 1px,transparent 1px);background-size:24px 24px;background-position:-1px -1px}
+figcaption{margin-top:14px;display:flex;gap:4px 12px;flex-wrap:wrap;align-items:baseline}
+figcaption code{font:12px var(--mono);color:var(--ink)}
+.note{font-size:14px;color:var(--mute);margin:10px 0 0}
+.card{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:var(--sh);transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
+.card.lift:hover{transform:translateY(-4px);box-shadow:var(--sh-lg)}
+/* evolution */
+.eras{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.era{overflow:hidden;position:relative}
+.era svg{display:block;width:100%;height:auto;transition:transform .8s var(--ease)}
+.era:hover svg{transform:scale(1.035)}
+.era .tx{padding:18px 20px 20px;position:relative;background:#fff}
+.era h4{margin:6px 0 6px;font-size:18px;letter-spacing:-.015em}
+.era p{margin:0;font-size:14.5px;line-height:1.5;color:var(--body)}
+.era.now{box-shadow:0 0 0 2px var(--blue),var(--sh)}
+.badge{position:absolute;top:12px;right:12px;z-index:2;background:var(--blue);color:#fff;font:600 11px/1 var(--sans);letter-spacing:.02em;padding:7px 10px;border-radius:999px;box-shadow:0 6px 14px -6px rgba(40,129,231,.9)}
+/* tables */
+.tbl{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;font-size:15px;line-height:1.5;box-shadow:var(--sh-sm)}
+.tbl th{background:#fbf8f1;text-align:left;font:400 11px/1.6 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--mute);padding:13px 18px}
+.tbl td{padding:15px 18px;border-top:1px solid var(--line);color:var(--body);vertical-align:top;transition:background .25s}
+.tbl tr:hover td{background:#fffcf6}
+.tbl td:first-child{color:var(--ink);font-weight:600;white-space:nowrap}
+/* architecture */
+.archscroll{overflow-x:auto;scrollbar-width:thin}.archscroll svg{min-width:760px;width:100%;height:auto;display:block}.swipe{display:none;margin:0 0 8px}
+.node{cursor:pointer;outline:none}
+.node .ring{opacity:0;transition:opacity .35s var(--ease)}
+.node .b{transition:fill .35s var(--ease)}
+.node:hover .ring,.node:focus-visible .ring,.node.sel .ring{opacity:1}
+.node:hover .b.w,.node.sel .b.w{fill:#f3f8ff}
+.flow{stroke:var(--blue);stroke-width:2;stroke-dasharray:3 13;stroke-linecap:round;fill:none;animation:flow 1.6s linear infinite;opacity:.85}
+@keyframes flow{to{stroke-dashoffset:-32}}
+.panel{margin-top:18px;padding:20px 22px;min-height:124px;display:grid;grid-template-columns:44px minmax(0,1fr);gap:16px;align-items:start}
+.panel .ic{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,var(--blue),var(--navy));box-shadow:0 8px 18px -8px rgba(40,129,231,.9);display:grid;place-items:center;color:#fff;font:600 15px var(--sans)}
+.panel h4{margin:2px 0 6px;font-size:19px;letter-spacing:-.015em}.panel p{margin:0;font-size:15.5px;line-height:1.55;color:var(--body)}
+.swap{animation:swap .5s var(--ease)}
+@keyframes swap{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+/* segmented */
+.seg{position:relative;display:inline-flex;background:#fff;border:1px solid var(--line);border-radius:999px;padding:4px;box-shadow:var(--sh-sm);max-width:100%}
+.seg .thumb{position:absolute;top:4px;bottom:4px;left:0;width:0;border-radius:999px;background:var(--void);box-shadow:0 6px 14px -6px rgba(5,10,20,.6);transition:transform .5s var(--ease),width .5s var(--ease)}
+.seg button{position:relative;z-index:1;min-height:40px;padding:0 16px;border-radius:999px;border:0;background:transparent;color:var(--body);font:500 14px var(--sans);cursor:pointer;white-space:nowrap;transition:color .4s var(--ease)}
+.seg button[aria-pressed=true]{color:#fff}
+.toggle{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 16px 0 8px;border-radius:999px;border:1px solid var(--line);background:#fff;box-shadow:var(--sh-sm);font:500 14px var(--sans);color:var(--ink);cursor:pointer}
+.toggle .sw{width:40px;height:24px;border-radius:999px;background:rgba(5,10,20,.12);position:relative;transition:background .35s var(--ease)}
+.toggle .sw::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 2px 4px rgba(5,10,20,.25);transition:transform .35s var(--ease)}
+.toggle[aria-pressed=true] .sw{background:var(--blue)}.toggle[aria-pressed=true] .sw::after{transform:translateX(16px)}
+.ghost{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--ink);font:500 14px var(--sans);cursor:pointer;box-shadow:var(--sh-sm);transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+.ghost:hover{transform:translateY(-1px);box-shadow:var(--sh)}
+.ghost:focus-visible,.seg button:focus-visible,.btn:focus-visible,.toggle:focus-visible,.toc a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.ctrls{display:flex;gap:10px;align-items:center;margin-top:16px;flex-wrap:wrap}
+/* frame loop */
+.loop{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:28px;align-items:center}
+.cv{position:relative;aspect-ratio:2/1;border-radius:18px;overflow:hidden;background:#0b0f17;box-shadow:var(--sh-lg)}
+.cv canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.cv .stage{position:absolute;left:12px;top:12px;background:rgba(255,255,255,.14);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.18);color:#fff;font:12px var(--mono);padding:6px 12px;border-radius:999px;letter-spacing:.04em}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.steps li{position:relative;overflow:hidden;display:grid;grid-template-columns:24px minmax(0,1fr);gap:12px;padding:12px 14px;border-radius:14px;font-size:15px;line-height:1.45;color:var(--body);border:1px solid transparent;transition:background .4s var(--ease),box-shadow .4s var(--ease),border-color .4s}
+.steps li.on{background:#fff;box-shadow:var(--sh);border-color:var(--line)}
+.steps li::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:calc(var(--p,0)*100%);background:var(--blue);opacity:0}
+.steps li.on::after{opacity:1}
+.steps .dot{background:rgba(5,10,20,.25);box-shadow:none;transition:background .4s}.steps li.on .dot{background:var(--blue);box-shadow:0 4px 10px -4px rgba(40,129,231,.8)}
+.steps b{color:var(--ink)}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:22px}
+.stat{padding:16px 18px}
+.stat b{display:block;font-size:30px;letter-spacing:-.03em;color:var(--ink);font-weight:600;white-space:nowrap;line-height:1.1}
+.stat b small{font-size:15px;color:var(--blue);font-weight:600;margin-left:3px;letter-spacing:0}
+.stat span{font-size:13.5px;color:var(--body);line-height:1.35;display:block;margin-top:6px}
+/* modes */
+.mock{margin-top:18px;background:linear-gradient(180deg,#1a1f2a,#0b0f17);border-radius:26px;padding:12px;aspect-ratio:16/8.2;display:flex;overflow:hidden;box-shadow:var(--sh-lg),inset 0 1px 0 rgba(255,255,255,.08)}
+.mock>div{border-radius:16px;overflow:hidden;transition:flex-basis .7s var(--ease),opacity .5s var(--ease),margin .7s var(--ease);flex:0 0 50%;position:relative}
+.mock svg{width:100%;height:100%;display:block}
+.mock[data-m=full] .rv{flex-basis:100%}.mock[data-m=full] .map{flex-basis:0;opacity:0}
+.mock[data-m=map] .rv{flex-basis:0;opacity:0}.mock[data-m=map] .map{flex-basis:100%}
+.mock[data-m=split] .rv,.mock[data-m=split] .map{flex-basis:calc(50% - 4px)}.mock[data-m=split] .rv{margin-right:8px}
+.chip{transition:opacity .5s var(--ease)}.mock.quiet .chip{opacity:0}
+/* latency */
+.lanes{display:grid;gap:16px}
+.lane{display:grid;grid-template-columns:160px minmax(0,1fr);gap:14px;align-items:center;font-size:14px;color:var(--body);font-weight:500}
+.track{position:relative;height:48px;border-radius:999px;background:#fff;border:1px solid var(--line);box-shadow:inset 0 1px 3px rgba(5,10,20,.05)}
+.track::before{content:"";position:absolute;left:18px;right:18px;top:50%;border-top:2px dashed rgba(5,10,20,.10)}
+.car{position:absolute;top:50%;left:0;width:38px;height:22px;margin-top:-11px;border-radius:8px;background:var(--void);box-shadow:0 6px 12px -4px rgba(5,10,20,.5);animation:drive 4s linear infinite}
+.lane.scr .car{background:linear-gradient(135deg,var(--blue),var(--navy));box-shadow:0 6px 14px -4px rgba(40,129,231,.9);animation-delay:var(--lag,-0s)}
+@keyframes drive{0%{left:1.5%}100%{left:calc(98.5% - 38px)}}
+/* 2x2 */
+.quad{display:grid;grid-template-columns:28px minmax(0,1fr);grid-template-rows:minmax(0,1fr) 30px;gap:10px}
+.qgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.q{padding:18px 20px;min-height:160px}
+.q h4{margin:6px 0 6px;font-size:18px;letter-spacing:-.015em}.q p{margin:0;font-size:14.5px;line-height:1.5;color:var(--body)}
+.q .eg{margin-top:12px;display:inline-block;background:var(--sand);border-radius:999px;padding:5px 12px;font-size:12.5px;font-weight:500;color:var(--ink)}
+.q.ok{background:linear-gradient(160deg,#fff 0%,var(--sage) 140%)}
+.q.hon{background:linear-gradient(160deg,#fff 0%,var(--cream) 120%)}
+.q.risk{background:linear-gradient(160deg,#fff 0%,rgba(255,166,48,.22) 130%);box-shadow:0 0 0 1.5px var(--amber),var(--sh)}.q.risk .mono{color:#b86a00}
+.q.ok .mono{color:#3f6b1f}
+.yax{writing-mode:vertical-rl;transform:rotate(180deg);text-align:center}.xax{text-align:center;align-self:center}
+/* lessons band */
+.band{background:var(--cream);margin:88px 0 0;padding:clamp(48px,7vw,96px) 0 clamp(56px,7vw,100px)}
+.band h2{margin-top:0!important}
+.lessons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:32px 0 0}
+.lesson{padding:22px 22px 24px}
+.lesson .ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--cream);margin-bottom:14px}
+.lesson .ic svg{width:22px;height:22px}
+.lesson h4{margin:0 0 6px;font-size:18px;letter-spacing:-.015em}.lesson p{margin:0;font-size:15px;line-height:1.55;color:var(--body)}
+.sources{font-size:15px;padding-left:20px}.sources li{margin-bottom:6px}
+/* cta + footer */
+.cta{background:linear-gradient(var(--bg),var(--cream) 34%);text-align:center;padding:130px 16px 120px}
+.cta h2{font-size:clamp(34px,4.6vw,56px);line-height:1.04;letter-spacing:-.035em;font-weight:600;margin:0 auto 28px;max-width:16ch;text-wrap:balance}
+footer{background:var(--cream);border-top:1px solid rgba(229,211,179,.8);padding:44px clamp(16px,2.6vw,50px) 52px}
+.fgrid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(0,1fr);gap:28px;font-size:14.5px;color:var(--body)}
+.fgrid h5{margin:0 0 10px;font:400 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.fgrid p{margin:0 0 6px}
+@media(max-width:900px){.herocard,.loop{grid-template-columns:minmax(0,1fr)}.eras,.lessons{grid-template-columns:minmax(0,1fr)}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.fgrid{grid-template-columns:minmax(0,1fr)}.links{display:none}}
+@media(max-width:600px){body{font-size:17px}.lane{grid-template-columns:minmax(0,1fr);gap:6px}.tbl{font-size:13.5px}.swipe{display:block}
+ .q{min-height:0;padding:14px}.q p{display:none}.q h4{font-size:15px}.quad{grid-template-columns:22px minmax(0,1fr)}.qgrid{gap:8px}
+ .seg button{padding:0 12px;font-size:13.5px}.mock{aspect-ratio:4/3;border-radius:20px}.panel{grid-template-columns:minmax(0,1fr)}.panel .ic{display:none}
+ .stack thead{display:none}.stack tr{display:grid;padding-block:10px}.stack td{display:flow-root;border:0;padding:3px 14px;padding-inline-start:8.4em;text-align:start;white-space:normal!important}.stack td::before{content:attr(data-l);float:inline-start;width:7.5em;margin-inline-start:-7.8em;white-space:normal;font:400 11px/1.9 var(--mono);text-transform:uppercase;color:var(--mute)}.stack tr+tr{border-top:1px solid var(--line)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+<script>new MutationObserver(()=>{for(const c of document.querySelectorAll('.stack td:not([data-l])')){let i=0,p=c;while(p=p.previousElementSibling)i+=p.colSpan;c.dataset.l=c.closest('table').rows[0].cells[i]?.textContent||''}}).observe(document,{childList:true,subtree:true})</script>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="wordmark" viewBox="0 0 1882.14 301.981"><path d="M6.53395 121.522C114.833 72.3146 228.286 -5.68818 336.591 4.14683V120.206C228.292 169.374 114.839 247.416 6.53395 237.568V121.522ZM336.603 228.998C275.779 238.002 237.619 240.156 171.562 228.998V210.095C233.453 184.986 287.631 152.727 336.603 129.19V228.998ZM6.53395 12.3522C67.3522 3.34792 105.506 1.20071 171.562 12.3522V31.2685C109.672 56.4025 55.5064 88.662 6.53395 112.186V12.3522Z"/><path d="M418.562 231.765V3.29923H445.448V87.8314C455.285 75.429 472.335 63.353 500.533 63.353C538.24 63.353 568.077 83.9149 568.077 139.073V231.765H541.191V140.705C541.191 106.109 525.124 87.8314 496.27 87.8314C462.498 87.8314 445.448 108.72 445.448 143.969V231.765H418.562Z"/><path d="M762.456 297.04V65.3113H785.736V92.6984C796.884 77.3585 818.524 63.353 846.722 63.353C892.954 63.353 927.054 94.359 927.054 148.538C927.054 199.453 892.954 233.723 846.722 233.723C818.524 233.723 799.507 222.3 789.343 206.307V297.04H762.456ZM844.099 209.897C877.216 209.897 899.512 184.766 899.512 148.538C899.512 112.31 877.216 87.1787 844.099 87.1787C811.311 87.1787 789.015 112.31 789.015 147.885C789.015 184.44 811.311 209.897 844.099 209.897Z"/><path d="M948.812 297.04V65.3113H972.092L972.687 94.0724C983.835 78.7326 1004.88 63.353 1033.08 63.353C1079.31 63.353 1113.41 94.359 1113.41 148.538C1113.41 199.453 1079.31 233.723 1033.08 233.723C1004.88 233.723 985.863 222.3 975.699 206.307V297.04H948.812ZM1030.46 209.897C1063.57 209.897 1085.87 184.766 1085.87 148.538C1085.87 112.31 1063.57 87.1787 1030.46 87.1787C997.667 87.1787 975.371 112.31 975.371 147.885C975.371 184.44 997.667 209.897 1030.46 209.897Z"/><path d="M1210.91 233.723C1160.74 233.723 1127.96 199.453 1127.960 148.538C1127.96 97.9492 1160.09 63.353 1207.3 63.353C1254.19 63.353 1286 93.7063 1286 144.295V153.76H1156.15V156.045C1156.15 187.703 1177.14 209.897 1208.94 209.897C1233.21 209.897 1251.57 197.495 1257.14 175.954H1284.36C1277.8 209.244 1249.6 233.723 1210.91 233.723ZM1157.14 131.24H1257.8C1255.17 102.845 1235.5 86.8523 1207.63 86.8523C1183.04 86.8523 1160.09 103.498 1157.14 131.24Z"/><path d="M1307.76 231.765V65.3113H1331.04V87.8314C1340.87 75.1026 1361.53 63.353 1389.73 63.353C1427.43 63.353 1457.27 83.9149 1457.27 139.073V231.765H1430.38V140.705C1430.38 106.109 1414.32 87.8314 1385.46 87.8314C1351.69 87.8314 1334.64 108.72 1334.64 143.969V231.765H1307.76Z"/><path d="M1484.83 231.765V65.3113H1511.71V231.765H1484.83Z"/><path d="M1540.86 231.765V65.3113H1564.14V87.8314C1573.98 75.1026 1594.63 63.353 1622.83 63.353C1660.54 63.353 1690.38 83.9149 1690.38 139.073V231.765H1663.49V140.705C1663.49 106.109 1647.42 87.8314 1618.57 87.8314C1584.8 87.8314 1567.75 108.72 1567.75 143.969V231.765H1540.86Z"/><path d="M1792.36 298.999C1749.74 298.999 1719.9 279.09 1715.64 242.535H1743.18C1747.77 263.423 1766.46 275.173 1794.33 275.173C1829.41 275.173 1848.43 258.854 1848.43 222.626V205.002C1837.28 220.341 1819.25 233.723 1791.05 233.723C1744.82 233.723 1710.72 202.717 1710.72 148.538C1710.72 97.6228 1744.82 63.353 1791.05 63.353C1819.25 63.353 1841.87 75.7997 1852.04 91.7922V65.3113H1875.32V223.605C1875.32 271.583 1849.74 298.999 1792.36 298.999ZM1793.67 209.897C1826.46 209.897 1848.76 184.766 1848.76 149.191C1848.76 112.636 1826.46 87.1787 1793.67 87.1787C1760.56 87.1787 1738.26 112.31 1738.26 148.538C1738.26 184.766 1760.56 209.897 1793.67 209.897Z"/><path d="M705.801 206.633L705.856 209.471C705.818 208.548 705.801 207.602 705.801 206.633Z"/><path d="M588.091 185.092C588.091 215.446 613.01 233.723 649.733 233.723C678.587 233.723 695.965 220.994 705.801 205.981V206.633L705.856 209.471L705.801 231.689L731.376 231.764V196.189V123.407C731.376 84.5676 706.785 63.353 664.16 63.353C623.83 63.353 597.272 82.6094 593.337 115.247H620.224C623.502 98.2756 638.257 87.1787 662.849 87.1787C689.079 87.1787 704.49 99.2547 704.49 121.775V133.198H655.307C611.371 133.198 588.091 151.802 588.091 185.092ZM704.49 163.878C704.49 191.62 685.145 210.876 651.7 210.876C629.404 210.876 615.305 201.085 615.305 183.461C615.305 164.531 628.749 155.718 652.684 155.718H704.49V163.878Z"/></symbol>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#18253d"/><stop offset="1" stop-color="#4a6290"/></linearGradient>
+  </defs>
+</svg>
+
+<div class="ann">New book launching soon — <b>Small Teams Ship More.</b> <span>→</span></div>
+<header class="topbar">
+  <a class="logo" href="#top" aria-label="happening — home"><svg viewBox="0 0 1882.14 301.981" fill="currentColor"><use href="#wordmark"/></svg></a>
+  <nav class="links" aria-label="Main"><a href="#top">Work</a><a href="#top">About</a><a href="#top">Journal</a></nav>
+  <a class="btn" href="#connect">Connect with us</a>
+</header>
+
+<div class="wrap" id="top">
+  <a class="back mono" href="#top">← Journal</a>
+  <ul class="tags"><li>AI in Design</li><li>Automotive UX</li><li>Teardown</li></ul>
+  <h1>Tesla Reality View: your car doesn't draw the road anymore. It paints it.</h1>
+  <div class="meta mono"><span>Nov 24, 2026</span><span>10 min read</span><span>Swastik Bose</span></div>
+  <p class="lead">FSD v15 swapped a game-engine display for a live generative model. Here is how it works, why it looks like GTA, and what it teaches anyone designing interfaces for AI systems.</p>
+
+  <div class="herocard">
+    <div>
+      <blockquote>“It's like GTA.”</blockquote>
+      <span class="mono">Elon Musk, posting the first Reality View clip</span>
+      <ol class="legend" id="legend">
+        <li data-p="1"><span class="dot">1</span><span><b>Chase camera.</b> A virtual viewpoint above and behind the car.</span></li>
+        <li data-p="2"><span class="dot">2</span><span><b>Floating turn arrow.</b> The plan hangs over the real intersection.</span></li>
+        <li data-p="3"><span class="dot">3</span><span><b>Planned path.</b> Where FSD intends to go next.</span></li>
+        <li data-p="4"><span class="dot">4</span><span><b>Painted detail.</b> Owners spotted reflections, billboards, even Christmas lights.</span></li>
+        <li data-p="5"><span class="dot">5</span><span><b>Layout switch.</b> Full screen, split with the map, or map only.</span></li>
+        <li data-p="6"><span class="dot">6</span><span><b>Quiet mode.</b> A moon icon trims the screen to fewer elements.</span></li>
+      </ol>
+    </div>
+    <div class="screen">
+      <svg viewBox="0 0 640 420" role="img" aria-label="Illustration of the Reality View screen: a chase-camera view of the car on a city street with a floating turn arrow and planned path">
+        <defs>
+          <clipPath id="scr"><rect x="14" y="14" width="612" height="392" rx="16"/></clipPath>
+          <linearGradient id="road" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#232a36"/><stop offset="1" stop-color="#353d4c"/></linearGradient>
+          <linearGradient id="body" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#b9c3d3"/></linearGradient>
+          <linearGradient id="bld" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#34466a"/><stop offset="1" stop-color="#1e2a40"/></linearGradient>
+          <linearGradient id="bez" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#262c38"/><stop offset="1" stop-color="#0b0f17"/></linearGradient>
+          <linearGradient id="glare" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".10"/><stop offset=".45" stop-color="#fff" stop-opacity="0"/></linearGradient>
+          <pattern id="win" width="10" height="12" patternUnits="userSpaceOnUse"><rect x="2" y="3" width="4" height="5" fill="#ffd98a" opacity=".55"/></pattern>
+          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+        <rect width="640" height="420" rx="30" fill="url(#bez)"/>
+        <rect x=".5" y=".5" width="639" height="419" rx="29.5" fill="none" stroke="#fff" stroke-opacity=".08"/>
+        <g clip-path="url(#scr)">
+          <rect x="14" y="14" width="612" height="172" fill="url(#sky)"/>
+          <rect x="14" y="170" width="612" height="240" fill="#151a23"/>
+          <g fill="url(#bld)"><rect x="14" y="64" width="88" height="160"/><rect x="104" y="100" width="70" height="110"/><rect x="176" y="128" width="64" height="62"/><rect x="398" y="122" width="62" height="66"/><rect x="462" y="86" width="74" height="130"/><rect x="538" y="48" width="88" height="190"/></g>
+          <g fill="url(#win)"><rect x="22" y="72" width="74" height="140"/><rect x="108" y="108" width="62" height="96"/><rect x="466" y="94" width="66" height="116"/><rect x="542" y="58" width="78" height="170"/></g>
+          <path d="M14 236 L176 190 L176 206 L14 268Z" fill="#2a3346"/>
+          <path d="M18 230 Q60 222 100 214 T176 196" fill="none" stroke="#8fa3c4" stroke-width="1" opacity=".6"/>
+          <g><circle cx="26" cy="229" r="3" fill="#ff5a5a"/><circle cx="44" cy="226" r="3" fill="#ffd34d"/><circle cx="62" cy="222" r="3" fill="#4dd27a"/><circle cx="80" cy="219" r="3" fill="#4da3ff"/><circle cx="98" cy="215" r="3" fill="#ff5a5a"/><circle cx="116" cy="211" r="3" fill="#ffd34d"/><circle cx="134" cy="207" r="3" fill="#4dd27a"/><circle cx="152" cy="202" r="3" fill="#4da3ff"/><circle cx="170" cy="198" r="3" fill="#ff5a5a"/></g>
+          <path d="M60 406 L580 406 L352 180 L288 180Z" fill="url(#road)"/>
+          <path d="M60 406 L288 180 M580 406 L352 180" stroke="#5b6476" stroke-width="2"/>
+          <path d="M190 406 L306 180 M450 406 L334 180" stroke="#d7dde8" stroke-width="2" stroke-dasharray="14 12" opacity=".5"/>
+          <path d="M300 180 L480 180 L520 200 L330 200Z" fill="#2a303c"/>
+          <ellipse cx="320" cy="390" rx="74" ry="10" fill="#9fb4d6" opacity=".12"/>
+          <ellipse cx="248" cy="288" rx="26" ry="5" fill="#ffd98a" opacity=".14"/>
+          <path d="M292 318 L350 318 L352 236 L408 202 L398 192 L330 226Z" fill="#4da3ff" opacity=".28"/>
+          <g transform="translate(232 258)"><rect width="38" height="24" rx="6" fill="#c84b4b"/><rect x="6" y="3" width="26" height="9" rx="3" fill="#1d2330"/><rect x="2" y="18" width="7" height="3" fill="#ff8080"/><rect x="29" y="18" width="7" height="3" fill="#ff8080"/></g>
+          <g transform="translate(318 214)"><rect width="26" height="16" rx="4" fill="#dfe5ee"/><rect x="4" y="2" width="18" height="6" rx="2" fill="#1d2330"/></g>
+          <g transform="translate(296 186)"><rect width="18" height="22" rx="2" fill="#9aa6b8"/><rect y="16" width="18" height="6" fill="#6b7689"/></g>
+          <g filter="url(#glow)"><path d="M372 168 L404 168 L404 158 L428 176 L404 194 L404 184 L372 184Z" fill="#4da3ff"/></g>
+          <ellipse cx="320" cy="386" rx="62" ry="12" fill="#000" opacity=".45"/>
+          <g transform="translate(264 318)"><rect width="112" height="64" rx="18" fill="url(#body)"/><rect x="18" y="8" width="76" height="26" rx="10" fill="#2a3242"/><rect x="24" y="12" width="64" height="16" rx="6" fill="#4d5b74"/><rect x="6" y="46" width="22" height="6" rx="3" fill="#ff4d4d"/><rect x="84" y="46" width="22" height="6" rx="3" fill="#ff4d4d"/></g>
+          <rect x="526" y="30" width="84" height="26" rx="13" fill="#ffffff" opacity=".14"/><rect x="540" y="38" width="14" height="10" rx="2" fill="none" stroke="#fff" stroke-width="1.5"/><rect x="561" y="38" width="14" height="10" rx="2" fill="none" stroke="#fff" stroke-width="1.5" opacity=".6"/><path d="M568 38v10" stroke="#fff" stroke-width="1.5" opacity=".6"/><rect x="582" y="38" width="14" height="10" rx="2" fill="none" stroke="#fff" stroke-width="1.5" opacity=".6"/>
+          <circle cx="46" cy="376" r="16" fill="#ffffff" opacity=".14"/><path d="M50 368a9 9 0 1 0 4 13 7 7 0 0 1-4-13z" fill="#fff"/>
+          <rect x="14" y="14" width="612" height="392" fill="url(#glare)"/>
+        </g>
+        <g font-family="Instrument Sans, system-ui, sans-serif" font-weight="600" font-size="12" text-anchor="middle">
+          <g class="pin" data-p="1"><circle class="ring" cx="400" cy="300" r="12" fill="#2881e7"/><circle class="c" cx="400" cy="300" r="12" fill="#2881e7" stroke="#fff" stroke-width="2"/><text x="400" y="304" fill="#fff">1</text></g>
+          <g class="pin" data-p="2"><circle class="ring" cx="440" cy="148" r="12" fill="#2881e7"/><circle class="c" cx="440" cy="148" r="12" fill="#2881e7" stroke="#fff" stroke-width="2"/><text x="440" y="152" fill="#fff">2</text></g>
+          <g class="pin" data-p="3"><circle class="ring" cx="372" cy="262" r="12" fill="#2881e7"/><circle class="c" cx="372" cy="262" r="12" fill="#2881e7" stroke="#fff" stroke-width="2"/><text x="372" y="266" fill="#fff">3</text></g>
+          <g class="pin" data-p="4"><circle class="ring" cx="98" cy="246" r="12" fill="#2881e7"/><circle class="c" cx="98" cy="246" r="12" fill="#2881e7" stroke="#fff" stroke-width="2"/><text x="98" y="250" fill="#fff">4</text></g>
+          <g class="pin" data-p="5"><circle class="ring" cx="568" cy="74" r="12" fill="#2881e7"/><circle class="c" cx="568" cy="74" r="12" fill="#2881e7" stroke="#fff" stroke-width="2"/><text x="568" y="78" fill="#fff">5</text></g>
+          <g class="pin" data-p="6"><circle class="ring" cx="80" cy="372" r="12" fill="#2881e7"/><circle class="c" cx="80" cy="372" r="12" fill="#2881e7" stroke="#fff" stroke-width="2"/><text x="80" y="376" fill="#fff">6</text></g>
+        </g>
+      </svg>
+      <div class="cap mono"><code>RealityView</code><span>Anatomy · our illustration, not a Tesla screenshot</span></div>
+    </div>
+  </div>
+</div>
+
+<nav class="toc" aria-label="Sections"><div class="scroll">
+  <a href="#shift">The shift</a><a href="#evolution">Evolution</a><a href="#pipeline">How it works</a><a href="#frames">Frame loop</a><a href="#interface">Interface</a><a href="#trust">Trust paradox</a><a href="#lessons">Lessons</a><a href="#sources">Sources</a>
+</div></nav>
+
+<article>
+<div class="wrap">
+<div class="col" id="shift">
+  <h2>A screen that stopped drawing and started imagining</h2>
+  <p>On November 21, 2026, Tesla began rolling out Full Self-Driving (Supervised) v15 to Early Access members (<a href="https://www.zerohedge.com/technology/tesla-rolls-out-gta-style-reality-view-full-self-driving">ZeroHedge</a>). The headline wasn't the driving. It was the screen. Within a day owners were posting their car rendering wet-road reflections, a billboard downtown and the Christmas lights on a neighbour's house.</p>
+  <p>Tesla calls it <strong>Reality View</strong> and describes it as a real-time <em>generative</em> driving visualization, streamed from a virtual camera above the car. That word is the story. For six years the display <em>drew</em> the road: perception detected objects, and an engine placed a 3D model where each one was. Reality View places nothing. A neural network paints every frame.</p>
+  <p class="pull">Symbolic UI tells you what the system detected. Generated UI shows you what the system imagines. They earn trust in very different ways.</p>
+  <p>That shift, from symbolic to generated interface, is coming to every product where an AI acts for someone. So let's take the car's screen apart.</p>
+</div>
+
+<div class="col" id="evolution">
+  <h2>From grey boxes to a generated world</h2>
+  <p>Reality View is the third rendering approach Tesla has shipped, and each one changed who does the drawing. Early FSD screens sat on dark backdrops with surrounding traffic as simple, boxy shapes (<a href="https://autos.yahoo.com/ev-and-future-tech/articles/elon-musk-says-teslas-fsd-161500557.html">Yahoo Autos</a>), running on the open-source Godot engine (<a href="https://www.teslarati.com/tesla-plans-unreal-engine-driver-visualization-crazy-upgrade/">Teslarati</a>).</p>
+</div>
+<figure class="wide">
+  <div class="eras">
+    <div class="era card lift">
+      <svg viewBox="0 0 300 170" aria-hidden="true"><rect width="300" height="170" fill="#0d1118"/><path d="M40 170 L136 56 L164 56 L260 170Z" fill="#1a1f28"/><path d="M100 170 L146 56 M200 170 L154 56" stroke="#3b4352" stroke-dasharray="8 7"/><rect x="128" y="124" width="44" height="30" rx="8" fill="#e9edf3"/><rect x="138" y="84" width="22" height="14" rx="3" fill="#6d7686"/><rect x="104" y="100" width="22" height="15" rx="3" fill="#6d7686"/><path d="M190 108l6-10 6 10z" fill="#e8873a"/><path d="M214 128l8-5 6 4 5-3 3 6-9 4-8-1z" fill="#7d8698"/><rect x="146" y="66" width="8" height="8" rx="2" fill="#4a5262"/></svg>
+      <div class="tx"><span class="mono">2019–2025 · Godot</span><h4>The asset library</h4><p>Each detected class gets a stock model. Unknown objects become a generic debris pile.</p></div>
+    </div>
+    <div class="era card lift">
+      <svg viewBox="0 0 300 170" aria-hidden="true"><defs><radialGradient id="lit" cx=".5" cy=".2" r=".9"><stop offset="0" stop-color="#28314a"/><stop offset="1" stop-color="#0d1118"/></radialGradient><linearGradient id="red" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff7a7a"/><stop offset="1" stop-color="#a82b2b"/></linearGradient><linearGradient id="wh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#aeb8c8"/></linearGradient></defs><rect width="300" height="170" fill="url(#lit)"/><path d="M40 170 L136 56 L164 56 L260 170Z" fill="#1e2430"/><path d="M100 170 L146 56 M200 170 L154 56" stroke="#4a5364" stroke-dasharray="8 7"/><ellipse cx="150" cy="156" rx="30" ry="5" fill="#000" opacity=".5"/><rect x="128" y="122" width="44" height="32" rx="10" fill="url(#wh)"/><rect x="136" y="126" width="28" height="10" rx="4" fill="#2a3242"/><ellipse cx="149" cy="99" rx="14" ry="3" fill="#000" opacity=".5"/><rect x="138" y="84" width="22" height="14" rx="4" fill="url(#red)"/><rect x="104" y="100" width="22" height="15" rx="4" fill="url(#wh)" opacity=".8"/><path d="M190 108l6-10 6 10z" fill="#ff9a4d"/></svg>
+      <div class="tx"><span class="mono">2026.14 · Unreal Engine</span><h4>Better models, same idea</h4><p>Vehicles move to Unreal with real lighting. Still a library of pre-built assets.</p></div>
+    </div>
+    <div class="era card lift now">
+      <span class="badge">Now</span>
+      <svg viewBox="0 0 300 170" aria-hidden="true"><defs><pattern id="w2" width="7" height="9" patternUnits="userSpaceOnUse"><rect x="2" y="2" width="3" height="4" fill="#ffd98a" opacity=".55"/></pattern></defs><rect width="300" height="170" fill="url(#sky)"/><rect y="70" width="300" height="100" fill="#151a23"/><g fill="#2c3b5a"><rect x="0" y="20" width="44" height="70"/><rect x="46" y="40" width="34" height="44"/><rect x="226" y="34" width="36" height="52"/><rect x="264" y="12" width="36" height="80"/></g><g fill="url(#w2)"><rect x="4" y="24" width="36" height="60"/><rect x="230" y="38" width="28" height="44"/><rect x="266" y="16" width="32" height="70"/></g><circle cx="8" cy="96" r="2" fill="#ff5a5a"/><circle cx="18" cy="94" r="2" fill="#ffd34d"/><circle cx="28" cy="92" r="2" fill="#4dd27a"/><circle cx="38" cy="90" r="2" fill="#4da3ff"/><circle cx="48" cy="88" r="2" fill="#ff5a5a"/><circle cx="58" cy="86" r="2" fill="#ffd34d"/><path d="M40 170 L136 70 L164 70 L260 170Z" fill="#2a313d"/><path d="M100 170 L146 70 M200 170 L154 70" stroke="#cfd6e2" stroke-dasharray="8 7" opacity=".5"/><ellipse cx="150" cy="160" rx="34" ry="4" fill="#9fb4d6" opacity=".18"/><path d="M136 132 L166 132 L166 92 L190 80 L186 74 L156 88Z" fill="#4da3ff" opacity=".3"/><path d="M178 66h14v-6l12 10-12 10v-6h-14z" fill="#4da3ff"/><rect x="128" y="124" width="44" height="32" rx="10" fill="#e9edf3"/><rect x="136" y="128" width="28" height="10" rx="4" fill="#2a3242"/><rect x="140" y="92" width="18" height="12" rx="3" fill="#c84b4b"/></svg>
+      <div class="tx"><span class="mono">Nov 2026 · FSD v15</span><h4>A generated world</h4><p>No asset library. A diffusion model paints whatever the encoder's features carry.</p></div>
+    </div>
+  </div>
+  <figcaption class="mono"><code>Evolution</code><span>Three rendering eras · illustrative</span></figcaption>
+</figure>
+<div class="col">
+  <table class="tbl stack">
+    <thead><tr><th>When</th><th>What changed</th></tr></thead>
+    <tbody>
+      <tr><td>Nov 21, 2026</td><td>FSD v15 ships Reality View, a generative overhead view of the drive (<a href="https://insideevs.com/news/816351/tesla-fsd-v15-new-features/">InsideEVs</a>)</td></tr>
+      <tr><td>Mid 2026</td><td>Update 2026.26 retunes lighting after the Unreal switch made car colours look off (<a href="https://www.notateslaapp.com/tr/software-updates/version/2026.26.6.2/release-notes">Not a Tesla App</a>)</td></tr>
+      <tr><td>2026</td><td>Update 2026.14 moves vehicle models to Unreal Engine (same source)</td></tr>
+      <tr><td>Aug 2025</td><td>Hacker greentheonly finds Unreal code in firmware 2025.20, first on AMD Model S/X (<a href="https://www.notateslaapp.com/news/3008/tesla-to-switch-to-unreal-engine-for-improved-fsd-visualizationsk">Not a Tesla App</a>)</td></tr>
+    </tbody>
+  </table>
+  <p style="margin-top:26px">The asset model had a hard ceiling. Anything without a 3D model either vanished or became a stand-in: a "dog" model covered similar-sized animals, and unidentified objects showed as a debris pile that didn't match the real shape (<a href="https://www.notateslaapp.com/tesla-reference/636/%3Ca%20href=">Not a Tesla App</a>). Every new thing the car understood needed someone to build an asset for it. Reality View removes the ceiling.</p>
+</div>
+
+<div class="col" id="pipeline">
+  <h2>How it works: one set of eyes, two brains</h2>
+  <p>Reality View is neither a camera feed nor a game engine. It is a second neural network that reads the same perception data as the driving network, then generates an image from it. Musk laid out the architecture on X a day after launch, as reported by <a href="https://www.teslarati.com/tesla-fsd-v15s-reality-drive-one-complaint-musk-solution/">Teslarati</a> and <a href="https://notateslakiller.com/en/tesla-reality-view-fsd-v15-live-generated-screen-half-chip/">Not a Tesla Killer</a>. Tap any block in the blueprint below.</p>
+</div>
+<figure class="wide">
+  <div class="print">
+    <p class="mono swipe">Swipe sideways to see the full pipeline →</p>
+    <div class="archscroll">
+      <svg viewBox="0 0 1000 410" role="group" aria-label="FSD v15 pipeline: cameras feed the vision encoder, which feeds both the driving model and the Reality View model" font-family="Instrument Sans, system-ui, sans-serif">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#b9ab90"/></marker>
+          <filter id="nsh" x="-20%" y="-30%" width="140%" height="180%"><feDropShadow dx="0" dy="8" stdDeviation="9" flood-color="#050a14" flood-opacity=".10"/><feDropShadow dx="0" dy="1" stdDeviation="1" flood-color="#050a14" flood-opacity=".06"/></filter>
+          <linearGradient id="pg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2881e7"/><stop offset="1" stop-color="#25478d"/></linearGradient>
+        </defs>
+        <g fill="none" stroke="#cbbd9f" stroke-width="1.5">
+          <path d="M150 202H198" marker-end="url(#ar)"/><path d="M380 202H415V106H448" marker-end="url(#ar)"/><path d="M415 202V306H448" marker-end="url(#ar)"/>
+          <path d="M650 106H718" marker-end="url(#ar)"/><path d="M650 306H718" marker-end="url(#ar)"/>
+          <path d="M795 330V382H550V352" marker-end="url(#ar)"/>
+          <path d="M720 214H684V276H652" stroke-dasharray="5 5" marker-end="url(#ar)"/>
+        </g>
+        <g class="flows"><path class="flow" d="M150 202H198"/><path class="flow" d="M380 202H415V106H448"/><path class="flow" d="M415 202V306H448"/><path class="flow" d="M650 106H718"/><path class="flow" d="M650 306H718"/><path class="flow" d="M795 330V382H550V352"/></g>
+        <text x="672" y="402" text-anchor="middle" font-family="Space Mono, ui-monospace, monospace" font-size="11" fill="rgba(5,10,20,.5)" letter-spacing=".5">LAST FRAME + NOISE → NEXT FRAME</text>
+        <g class="node" data-k="cam" tabindex="0" role="button" aria-label="Cameras"><rect class="ring" x="16" y="166" width="138" height="72" rx="16" fill="none" stroke="#2881e7" stroke-width="2"/><rect class="b w" x="20" y="170" width="130" height="64" rx="13" fill="#fff" stroke="rgba(5,10,20,.08)" filter="url(#nsh)"/><text x="85" y="198" text-anchor="middle" font-weight="600" font-size="15" fill="#050a14">Cameras</text><text x="85" y="218" text-anchor="middle" font-family="Space Mono, ui-monospace, monospace" font-size="11" fill="rgba(5,10,20,.5)">LIVE VIDEO</text></g>
+        <g class="node" data-k="uve" tabindex="0" role="button" aria-label="Universal Vision Encoder"><rect class="ring" x="196" y="154" width="188" height="96" rx="16" fill="none" stroke="#2881e7" stroke-width="2"/><rect class="b w" x="200" y="158" width="180" height="88" rx="13" fill="#fff" stroke="rgba(5,10,20,.08)" filter="url(#nsh)"/><text x="290" y="188" text-anchor="middle" font-weight="600" font-size="15" fill="#050a14">Vision encoder</text><text x="290" y="208" text-anchor="middle" font-family="Space Mono, ui-monospace, monospace" font-size="11" fill="#2881e7">UVE</text><text x="290" y="228" text-anchor="middle" font-size="12.5" fill="rgba(5,10,20,.55)">FSD · Robotaxi · Optimus</text></g>
+        <g class="node" data-k="drv" tabindex="0" role="button" aria-label="Driving model"><rect class="ring" x="446" y="66" width="208" height="80" rx="16" fill="none" stroke="#2881e7" stroke-width="2"/><rect class="b w" x="450" y="70" width="200" height="72" rx="13" fill="#fff" stroke="rgba(5,10,20,.08)" filter="url(#nsh)"/><text x="550" y="100" text-anchor="middle" font-weight="600" font-size="15" fill="#050a14">Driving model</text><text x="550" y="122" text-anchor="middle" font-family="Space Mono, ui-monospace, monospace" font-size="11" fill="rgba(5,10,20,.5)">~3B PARAMETERS</text></g>
+        <g class="node" data-k="pnt" tabindex="0" role="button" aria-label="Reality View model"><rect class="ring" x="445" y="257" width="210" height="98" rx="17" fill="none" stroke="#2881e7" stroke-width="2"/><rect class="b" x="450" y="262" width="200" height="88" rx="13" fill="url(#pg)" filter="url(#nsh)"/><text x="550" y="290" text-anchor="middle" font-weight="600" font-size="15" fill="#fff">Reality View model</text><text x="550" y="310" text-anchor="middle" font-family="Space Mono, ui-monospace, monospace" font-size="11" fill="#cfe2fb">~1B · DIFFUSION</text><text x="550" y="332" text-anchor="middle" font-size="12.5" fill="rgba(255,255,255,.78)">half a TRIP chip on AI4</text></g>
+        <g class="node" data-k="wm" tabindex="0" role="button" aria-label="Large world model"><rect class="ring" x="716" y="172" width="258" height="84" rx="16" fill="none" stroke="#2881e7" stroke-width="2"/><rect class="b" x="720" y="176" width="250" height="76" rx="13" fill="#fff5e1" stroke="#cbbd9f" stroke-width="1.4" stroke-dasharray="6 5"/><text x="845" y="206" text-anchor="middle" font-weight="600" font-size="15" fill="#050a14">Large world model</text><text x="845" y="228" text-anchor="middle" font-family="Space Mono, ui-monospace, monospace" font-size="11" fill="rgba(5,10,20,.5)">OFF-CAR · TRAINING DATA</text></g>
+        <g class="node" data-k="ctl" tabindex="0" role="button" aria-label="Car controls"><rect class="ring" x="716" y="78" width="158" height="56" rx="16" fill="none" stroke="#2881e7" stroke-width="2"/><rect class="b w" x="720" y="82" width="150" height="48" rx="13" fill="#fff" stroke="rgba(5,10,20,.08)" filter="url(#nsh)"/><text x="795" y="111" text-anchor="middle" font-weight="500" font-size="14.5" fill="#050a14">Car controls</text></g>
+        <g class="node" data-k="scr" tabindex="0" role="button" aria-label="Center screen"><rect class="ring" x="716" y="278" width="158" height="56" rx="16" fill="none" stroke="#2881e7" stroke-width="2"/><rect class="b w" x="720" y="282" width="150" height="48" rx="13" fill="#fff" stroke="rgba(5,10,20,.08)" filter="url(#nsh)"/><text x="795" y="311" text-anchor="middle" font-weight="500" font-size="14.5" fill="#050a14">Center screen</text></g>
+      </svg>
+    </div>
+    <div class="panel card" aria-live="polite"><div class="ic" id="pi">RV</div><div id="pbody"><span class="mono" id="pk"></span><h4 id="pt"></h4><p id="pd"></p></div></div>
+  </div>
+  <figcaption class="mono"><code>Pipeline</code><span>As described by Musk, Nov 22, 2026 · parameter counts approximate</span></figcaption>
+</figure>
+<div class="col">
+  <p>Two design consequences fall out of this. Because the painter reuses features the driver already computes, Tesla says Reality View uses <strong>less</strong> total compute than the display it replaced (<a href="https://kingy.ai/blog/tesla-fsd-v15-0-1-guide/">Kingy AI</a>). And the screen is now coupled to the driving system's perception, not to a separate graphics pipeline. You see a rendering of what the encoder encoded, not a hand-curated object list.</p>
+  <p>One caution: nearly every technical figure here comes from Musk's posts and secondary coverage, not formal Tesla documentation. The Unreal Engine theory circulating on social media is speculation for Reality View; Tesla hasn't named a rendering engine for it (<a href="https://www.basenor.com/blogs/news/tesla-update-fsd-v15">Basenor</a>).</p>
+</div>
+
+<div class="col" id="frames">
+  <h2>The frame loop: why it doesn't shimmer</h2>
+  <p>Early AI video flickers because each frame is generated from scratch. Reality View avoids that with a simple trick: it starts every new frame from the last one. The painter adds noise to its previous image, then denoises it, steered by the freshest encoder features. Most of the scene carries over; only what changed gets repainted.</p>
+</div>
+<figure class="wide">
+  <div class="print">
+    <div class="loop">
+      <div>
+        <div class="cv"><canvas id="cv" width="400" height="200" aria-label="Animated illustration of a frame being noised and denoised into the next frame"></canvas><span class="stage" id="stg">1 · Last frame</span></div>
+        <div class="ctrls"><button class="ghost" id="play" aria-pressed="true">Pause</button><button class="ghost" id="stepb">Next step →</button></div>
+      </div>
+      <ol class="steps" id="steps">
+        <li class="on"><span class="dot">1</span><span><b>Last frame.</b> The image already on screen.</span></li>
+        <li><span class="dot">2</span><span><b>Add noise.</b> Loosen it so it can change.</span></li>
+        <li><span class="dot">3</span><span><b>Denoise with fresh features.</b> Recent UVE features steer what the noise resolves into.</span></li>
+        <li><span class="dot">4</span><span><b>New frame.</b> Cars have moved, the lane has scrolled; the rest held steady.</span></li>
+      </ol>
+    </div>
+    <div class="stats">
+      <div class="stat card"><b>18<small>Hz</small></b><span>encoder frames processed</span></div>
+      <div class="stat card"><b>4<small>cycles</small></b><span>to spread the work per frame</span></div>
+      <div class="stat card"><b>8<small>images</small></b><span>per output chunk</span></div>
+      <div class="stat card"><b>~36<small>fps</small></b><span>derived from Musk's figures, not measured</span></div>
+    </div>
+  </div>
+  <figcaption class="mono"><code>FrameLoop</code><span>Illustrative · figures via Not a Tesla Killer</span></figcaption>
+</figure>
+<div class="col">
+  <p>The figures come from Musk's description: the painter processes each encoder frame at 18 Hz, spreads the work across four cycles and outputs chunks of eight images. Not a Tesla Killer works that out to roughly 36 frames a second (<a href="https://notateslakiller.com/en/tesla-reality-view-fsd-v15-live-generated-screen-half-chip/">source</a>). The painter itself is a shrunken sibling of something much bigger: Musk says Tesla has had a near pixel-perfect world model since last year for synthetic training data, and the in-car model is a much smaller version of it (<a href="https://www.teslarati.com/tesla-fsd-v15s-reality-drive-one-complaint-musk-solution/">Teslarati</a>).</p>
+</div>
+
+<div class="col" id="interface">
+  <h2>The interface: a grammar borrowed from games</h2>
+  <p>Strip away the rendering and Reality View is a set of deliberate interaction choices. Most of them borrow from a visual language hundreds of millions of people learned in open-world games. Try the layouts below.</p>
+</div>
+<figure class="wide">
+  <div class="print">
+    <div class="ctrls" style="margin-top:0">
+      <div class="seg" role="group" aria-label="Layout"><span class="thumb"></span><button aria-pressed="true" data-m="full">Reality View</button><button aria-pressed="false" data-m="split">Split</button><button aria-pressed="false" data-m="map">Map</button></div>
+      <button class="toggle" id="quiet" aria-pressed="false"><span class="sw"></span>Quiet mode</button>
+    </div>
+    <div class="mock" id="mock" data-m="full">
+      <div class="rv"><svg viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="400" height="200" fill="url(#sky)"/><rect y="92" width="400" height="108" fill="#151a23"/><g fill="#2c3b5a"><rect x="0" y="30" width="60" height="70"/><rect x="62" y="50" width="44" height="46"/><rect x="300" y="44" width="46" height="52"/><rect x="348" y="20" width="52" height="80"/></g><path d="M70 200 L190 92 L214 92 L330 200Z" fill="#2a313d"/><path d="M140 200 L197 92 M260 200 L207 92" stroke="#cfd6e2" stroke-dasharray="9 8" opacity=".5"/><path d="M186 160 L214 160 L214 112 L242 98 L236 92 L204 108Z" fill="#4da3ff" opacity=".3"/><path d="M226 78h16v-7l14 11-14 11v-7h-16z" fill="#4da3ff"/><rect x="176" y="150" width="48" height="34" rx="10" fill="#e9edf3"/><rect x="185" y="154" width="30" height="11" rx="4" fill="#2a3242"/><rect x="150" y="118" width="22" height="14" rx="4" fill="#c84b4b"/><g class="chip"><rect x="10" y="10" width="66" height="15" rx="7.5" fill="#fff" opacity=".16"/><text x="43" y="20.5" text-anchor="middle" font-family="Instrument Sans, system-ui, sans-serif" font-size="7.5" fill="#fff">Turn right 120 m</text><rect x="352" y="10" width="38" height="15" rx="7.5" fill="#fff" opacity=".16"/><text x="371" y="20.5" text-anchor="middle" font-family="Instrument Sans, system-ui, sans-serif" font-size="7.5" fill="#fff">FSD</text></g></svg></div>
+      <div class="map"><svg viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="400" height="200" fill="#1a2130"/><g stroke="#2b3446" stroke-width="10"><path d="M0 60H400M0 140H400M90 0V200M220 0V200M330 0V200"/></g><g fill="#232c3d"><rect x="100" y="70" width="110" height="60" rx="4"/><rect x="230" y="70" width="90" height="60" rx="4"/><rect x="10" y="70" width="70" height="60" rx="4"/></g><path d="M220 200V140H330V60" fill="none" stroke="#4da3ff" stroke-width="6" stroke-linecap="round"/><circle cx="220" cy="180" r="8" fill="#fff" stroke="#4da3ff" stroke-width="4"/><g class="chip"><rect x="10" y="10" width="58" height="15" rx="7.5" fill="#fff" opacity=".16"/><text x="39" y="20.5" text-anchor="middle" font-family="Instrument Sans, system-ui, sans-serif" font-size="7.5" fill="#fff">Arrive 6 min</text></g></svg></div>
+    </div>
+  </div>
+  <figcaption class="mono"><code>LayoutModes</code><span>Interactive mock · labels and UI chips are illustrative</span></figcaption>
+</figure>
+<div class="col">
+  <table class="tbl stack">
+    <thead><tr><th>Element</th><th>What it does</th><th>Design job</th></tr></thead>
+    <tbody>
+      <tr><td>Chase camera</td><td>Virtual viewpoint above and behind; drag to swing it around</td><td>Own position and surroundings in one frame</td></tr>
+      <tr><td>Turn arrows</td><td>Arrows and chevrons hang over the next turn or roundabout exit</td><td>Shows intent, not just perception</td></tr>
+      <tr><td>Parking chevrons</td><td>Open bays appear as chevrons; the chosen one gets three, and the view drops to bird's-eye</td><td>Choice, confirmation and re-framing</td></tr>
+      <tr><td>Layouts</td><td>Full screen, map, split, plus swiping to the classic map</td><td>Driver sets world vs. route</td></tr>
+      <tr><td>Quiet mode</td><td>A moon icon trims the screen; turn-signal clicks fade after a few</td><td>Calm technology on long drives</td></tr>
+      <tr><td>Tap to drive</td><td>Musk demoed tapping a point to send the car there</td><td>From watching the AI to steering it</td></tr>
+    </tbody>
+  </table>
+  <p class="note">Sources: <a href="https://insideevs.com/news/816351/tesla-fsd-v15-new-features/">InsideEVs</a>, <a href="https://kingy.ai/blog/tesla-fsd-v15-0-1-guide/">Kingy AI</a>, <a href="https://www.basenor.com/blogs/news/tesla-update-fsd-v15">Basenor</a>.</p>
+  <h3>The camera is the biggest decision</h3>
+  <p>A third-person chase cam is a game convention for a reason: it shows your own position and the space around you in one frame. That is exactly the mental model a supervising driver needs. The old top-down view answered "what's near me?" The chase cam answers "what's near me, and where am I going next?"</p>
+  <h3>Intent moved into the world</h3>
+  <p>The planned turn used to live on the map. Now it floats over the actual intersection, in the same space as the cars and curbs, much like BMW's Augmented View navigation (<a href="https://autos.yahoo.com/ev-and-future-tech/articles/elon-musk-says-teslas-fsd-161500557.html">Yahoo Autos</a>). Putting the plan where the action is removes a mental hop between two screens.</p>
+  <h3>From watching to steering, almost</h3>
+  <p>Tesla frames Reality View as letting drivers see and control what FSD plans. That turns a status monitor into an input surface. It isn't there yet: early owners found tapping didn't change the selected parking spot, and Sawyer Merritt had to drive manually before a parking prompt appeared (<a href="https://kingy.ai/blog/tesla-fsd-v15-0-1-guide/">Kingy AI</a>).</p>
+</div>
+
+<div class="col" id="trust">
+  <h2>The trust paradox: the more real it looks, the more it has to be right</h2>
+  <p>The goal of any autonomy display is calibrated trust: the driver should trust the system exactly as much as it deserves. Reality View makes the display far more convincing. That is only a win if it is also more accurate, and a generative renderer adds three new ways to fall short.</p>
+  <h3>1. Latency</h3>
+  <p>Teslarati's first drives found some input lag when dragging the camera, and a scene that trails the windshield by a fraction of a second; it felt less responsive than older visualizations. Musk blamed compute limits and proposed feeding fresher encoder features deeper into the denoising process, which he estimates cuts about 35% of the lag with no new hardware (<a href="https://www.teslarati.com/tesla-fsd-v15s-reality-drive-one-complaint-musk-solution/">Teslarati</a>).</p>
+</div>
+<figure class="col">
+  <div class="print">
+    <div class="ctrls" style="margin:0 0 18px"><div class="seg" role="group" aria-label="Lag"><span class="thumb"></span><button aria-pressed="true" data-l="now">Today</button><button aria-pressed="false" data-l="fix">With the proposed fix</button></div></div>
+    <div class="lanes" id="lanes">
+      <div class="lane"><span>Through the windshield</span><div class="track"><span class="car"></span></div></div>
+      <div class="lane scr"><span>On Reality View</span><div class="track"><span class="car"></span></div></div>
+    </div>
+  </div>
+  <figcaption class="mono"><code>Latency</code><span>Illustrative · Tesla hasn't published a lag figure</span></figcaption>
+</figure>
+<div class="col">
+  <p>For a supervising driver, a beautiful frame that is a beat old can be worse than an ugly one that is current.</p>
+  <h3>2. Hallucination</h3>
+  <p>A diffusion model produces the most plausible image for its inputs. Usually that is the truth. As autonomy researcher Missy Cummings told InsideEVs in an earlier piece on FSD, wherever there's a neural net, hallucination is possible (<a href="https://insideevs.com/news/736711/tesla-robotaxi-doubt-science-fsd/">InsideEVs</a>). Research on generative driving world models finds the same tension: the most realistic-looking models often break physics, while geometrically stable ones look less real (<a href="https://arxiv.org/pdf/2512.10958v1">WorldLens</a>). One early claim says Reality View can show a clear scene through fog (<a href="https://www.basenor.com/blogs/news/tesla-update-fsd-v15">Basenor</a>). It's unverified, and it's the case to worry about: a crisp, confident picture of a road the cameras can barely see.</p>
+  <h3>3. Realism signals certainty</h3>
+  <p>The old debris icon was ugly but honest; its abstraction said "something is here, I don't know what." Photorealism removes those visual hedges. Tesla says Reality View folds the model's separate explicit signals into one end-to-end visualization (<a href="https://notateslakiller.com/en/tesla-reality-view-fsd-v15-live-generated-screen-half-chip/">Not a Tesla Killer</a>). Clean for the eye, but "detected," "planned" and "unsure" now share one painted surface.</p>
+</div>
+<figure class="wide">
+  <div class="print">
+    <div class="quad">
+      <div class="yax mono">System confidence → high</div>
+      <div class="qgrid">
+        <div class="q card lift"><span class="mono">Undersells</span><h4>Abstract and sure</h4><p>The system knows exactly what's there but shows a grey box. Safe, just under-informative.</p><span class="eg">Old car models</span></div>
+        <div class="q card lift ok"><span class="mono">Calibrated</span><h4>Real and sure</h4><p>Rich detail the system actually perceived. Where Reality View shines.</p><span class="eg">Clear daytime street</span></div>
+        <div class="q card lift hon"><span class="mono">Honest</span><h4>Abstract and unsure</h4><p>Low fidelity admits low knowledge. The shape itself is the hedge.</p><span class="eg">Debris-pile icon</span></div>
+        <div class="q card lift risk"><span class="mono">Danger zone</span><h4>Real but unsure</h4><p>A photoreal frame over weak evidence. Looks certain, isn't. Design must flag it.</p><span class="eg">Fog claim, unverified</span></div>
+      </div>
+      <div></div><div class="xax mono">Rendering fidelity → photoreal</div>
+    </div>
+  </div>
+  <figcaption class="mono"><code>Fidelity × Confidence</code><span>Our framework · placements are illustrative</span></figcaption>
+</figure>
+<div class="col">
+  <p>There is also a plain attention question. A screen people describe as a video game is, by design, nice to look at. FSD v15 is still <em>Supervised</em>, and the display is no substitute for eyes on the road. Access is limited too: early coverage ties Reality View to HW4 (AI4) cars, it isn't available in Europe, and HW3 support is unconfirmed. Musk has pointed to a wider release in December without market dates (<a href="https://notateslakiller.com/en/tesla-reality-view-fsd-v15-live-generated-screen-half-chip/">Not a Tesla Killer</a>, <a href="https://kingy.ai/blog/tesla-fsd-v15-0-1-guide/">Kingy AI</a>).</p>
+</div>
+</div>
+
+<section class="band" id="lessons">
+  <div class="wrap">
+    <div class="col">
+      <h2>Six lessons for anyone designing AI interfaces</h2>
+      <p>You don't need to design for a car to learn from this. An agent booking travel, a copilot editing a document or a model triaging tickets faces the same problem: show the human what the machine understands, and what it's about to do.</p>
+    </div>
+    <div class="wide"><div class="lessons">
+      <div class="lesson card lift"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#2881e7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="11" rx="5"/><path d="M8 11v3M6.5 12.5h3"/><circle cx="16" cy="11.5" r=".6" fill="#2881e7"/><circle cx="17.5" cy="13.5" r=".6" fill="#2881e7"/></svg></div><h4>Borrow a grammar people speak</h4><p>Tesla took the chase cam and floating waypoints from games, so the screen felt readable on day one. Look for a metaphor your users already know.</p></div>
+      <div class="lesson card lift"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#2881e7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18V11a4 4 0 0 1 4-4h9"/><path d="M14 4l3 3-3 3"/></svg></div><h4>Show intent, not just perception</h4><p>The most useful pixels are the arrows over the next turn. "Here's what I see" builds curiosity; "here's what I'll do" builds trust.</p></div>
+      <div class="lesson card lift"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#2881e7" stroke-width="1.8" stroke-linecap="round"><path d="M4 18h3M10.5 18h3M17 18h3" opacity=".45"/><path d="M4 12h16"/><path d="M4 6h16" stroke-dasharray="2 3"/></svg></div><h4>Match fidelity to confidence</h4><p>Realism reads as certainty. When the system is unsure, the interface needs a way to say so: a softer render, a ghosted state, an explicit flag.</p></div>
+      <div class="lesson card lift"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#2881e7" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="13" r="7"/><path d="M12 9.5V13l2.5 1.5M10 3h4"/></svg></div><h4>Freshness beats beauty</h4><p>A delayed, gorgeous frame is a lie about the present. In real-time AI surfaces, latency is a design spec. Decide what you'll drop to stay current.</p></div>
+      <div class="lesson card lift"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#2881e7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h5l3-6 3 12 3-6h2"/></svg></div><h4>Explain from the real internals</h4><p>Reality View is painted from the same features the driver uses. The explanation should come from the system's actual state, not a story layered on top.</p></div>
+      <div class="lesson card lift"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#2881e7" stroke-width="1.8" stroke-linecap="round"><path d="M5 7h14M5 17h14"/><circle cx="9" cy="7" r="2.2" fill="#fff"/><circle cx="15" cy="17" r="2.2" fill="#fff"/></svg></div><h4>Give people the dial</h4><p>Full screen, split, map, quiet. Different moments need different amounts of machine visibility. Keep the calm option one tap away.</p></div>
+    </div></div>
+  </div>
+</section>
+
+<div class="wrap">
+<div class="col">
+  <h2>The road ahead</h2>
+  <p>"GTA in real life" is great marketing, but it undersells the change. Tesla stopped treating the in-car display as a graphics problem and started treating it as a model output. The screen is no longer a picture of a list of objects; it is the perception system's own imagination, made visible.</p>
+  <p>The next releases will show whether Tesla closes the latency gap, whether owners catch the painter inventing things, and whether the interface learns to show doubt as clearly as it shows Christmas lights. For designers, the takeaway is already here: generated interfaces are arriving, and the craft is shifting from drawing every state by hand to deciding what an AI should be allowed to show, and how honestly.</p>
+
+  <h2 id="sources" style="font-size:22px;margin-top:64px">Sources</h2>
+  <ul class="sources">
+    <li><a href="https://insideevs.com/news/816351/tesla-fsd-v15-new-features/">Tesla FSD V15 Makes Your Drive Look Like Grand Theft Auto</a> · InsideEVs</li>
+    <li><a href="https://www.teslarati.com/tesla-fsd-v15s-reality-drive-one-complaint-musk-solution/">Tesla FSD v15's 'Reality View' has one complaint and Musk has the solution</a> · Teslarati</li>
+    <li><a href="https://notateslakiller.com/en/tesla-reality-view-fsd-v15-live-generated-screen-half-chip/">Tesla No Longer Draws the Road on the Screen</a> · Not a Tesla Killer</li>
+    <li><a href="https://kingy.ai/blog/tesla-fsd-v15-0-1-guide/">Tesla FSD v15.0.1 looks like GTA VI. Here's what changed</a> · Kingy AI</li>
+    <li><a href="https://www.zerohedge.com/technology/tesla-rolls-out-gta-style-reality-view-full-self-driving">Tesla Rolls Out "GTA-Style" Reality View</a> · ZeroHedge</li>
+    <li><a href="https://www.basenor.com/blogs/news/tesla-update-fsd-v15">Tesla FSD V15 UI Overhaul</a> · Basenor</li>
+    <li><a href="https://autos.yahoo.com/ev-and-future-tech/articles/elon-musk-says-teslas-fsd-161500557.html">Musk Says FSD V15 Interface Makes Driving Look Like GTA</a> · Yahoo Autos</li>
+    <li><a href="https://www.notateslaapp.com/news/3008/tesla-to-switch-to-unreal-engine-for-improved-fsd-visualizationsk">Tesla to switch to Unreal Engine</a> and <a href="https://www.notateslaapp.com/tr/software-updates/version/2026.26.6.2/release-notes">2026.26.6.2 release notes</a> · Not a Tesla App</li>
+    <li><a href="https://www.notateslaapp.com/tesla-reference/636/%3Ca%20href=">All Tesla FSD Visualizations and What They Mean</a> · Not a Tesla App</li>
+    <li><a href="https://www.teslarati.com/tesla-plans-unreal-engine-driver-visualization-crazy-upgrade/">Tesla plans to use Unreal Engine for driver visualization</a> · Teslarati</li>
+    <li><a href="https://insideevs.com/news/736711/tesla-robotaxi-doubt-science-fsd/">Experts doubt the science behind Tesla's Robotaxi</a> · InsideEVs</li>
+    <li><a href="https://arxiv.org/pdf/2512.10958v1">WorldLens benchmark for driving world models</a> · arXiv</li>
+  </ul>
+  <p class="note">Illustrations on this page are Happening's own diagrams, not Tesla imagery.</p>
+</div>
+</div>
+</article>
+
+<section class="cta" id="connect">
+  <h2>Designing an interface for an AI system?</h2>
+  <a class="btn dark" href="#connect">Connect with us</a>
+</section>
+<footer>
+  <div class="fgrid">
+    <div><a class="logo" href="#top" aria-label="happening — home"><svg viewBox="0 0 1882.14 301.981" fill="currentColor"><use href="#wordmark"/></svg></a><p style="margin-top:14px">AI-native design and technology studio.</p></div>
+    <div><h5>Studios</h5><p>New York · Boston · New Jersey · San Francisco</p><p>Hyderabad · Bengaluru · Mumbai</p></div>
+    <div><h5>Journal</h5><p>More teardowns on design, AI and the products in between.</p><p>© 2026 happening</p></div>
+  </div>
+</footer>
+
+<script>
+{
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* hero pins <-> legend */
+const pins=[...document.querySelectorAll('.pin')],legs=[...document.querySelectorAll('#legend li')];
+function hot(p){pins.forEach(x=>x.classList.toggle('hot',x.dataset.p===p));legs.forEach(x=>x.classList.toggle('hot',x.dataset.p===p))}
+[...pins,...legs].forEach(el=>{el.addEventListener('mouseenter',()=>hot(el.dataset.p));el.addEventListener('mouseleave',()=>hot(''))});
+
+/* segmented thumbs */
+function placeThumb(seg){const b=seg.querySelector('button[aria-pressed="true"]'),t=seg.querySelector('.thumb');if(!b||!t)return;t.style.width=b.offsetWidth+'px';t.style.transform='translateX('+b.offsetLeft+'px)'}
+const segs=[...document.querySelectorAll('.seg')];
+function placeAll(){segs.forEach(placeThumb)}
+const ro=new ResizeObserver(placeAll);segs.forEach(s=>ro.observe(s));
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(placeAll);
+
+/* pipeline panel */
+const info={
+ cam:['CA','Input','Cameras','The car’s exterior cameras are the only input. Reality View is not a camera feed, though: no pixel on screen is raw video.'],
+ uve:['UV','New in v15','Universal Vision Encoder','Turns camera video into features. Tesla’s notes say it’s shared across FSD, Robotaxi and Optimus and trained on millions of internet videos. Both models read its output.'],
+ drv:['DR','The driver','Driving model','Reads the UVE features and outputs driving actions: steering, braking, speed. About 3 billion parameters, per Musk.'],
+ pnt:['RV','The painter','Reality View model','A separate ~1B-parameter diffusion model Musk calls a “conditional mean-flow model”, steered by the recent sequence of UVE features. It runs on half of one TRIP accelerator in the AI4 computer, and painting the screen is its only job.'],
+ wm:['WM','Off the car','Large world model','Musk says Tesla has had a near pixel-perfect world model since last year, used to generate synthetic training data. The in-car painter is a much smaller version of it.'],
+ ctl:['OUT','Output','Car controls','Driving actions. Because both models read one encoder, the screen and the steering never work from different perception.'],
+ scr:['OUT','Output','Center screen','Full screen, split with the map, or map only. Tesla says the new display uses less total compute than the one it replaced. Each new frame starts from the last one, re-noised.']};
+const nodes=[...document.querySelectorAll('.node')];
+const pi=document.getElementById('pi'),pk=document.getElementById('pk'),pt=document.getElementById('pt'),pd=document.getElementById('pd'),pb=document.getElementById('pbody');
+function pick(k){const v=info[k];if(!v)return;pi.textContent=v[0];pk.textContent=v[1];pt.textContent=v[2];pd.textContent=v[3];nodes.forEach(n=>n.classList.toggle('sel',n.dataset.k===k));pb.classList.remove('swap');void pb.offsetWidth;pb.classList.add('swap')}
+nodes.forEach(n=>{n.addEventListener('click',()=>pick(n.dataset.k));n.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();pick(n.dataset.k)}})});
+pick('pnt');
+
+/* layout modes */
+const mock=document.getElementById('mock');
+const segM=[...document.querySelectorAll('button[data-m]')];
+segM.forEach(b=>b.addEventListener('click',()=>{mock.dataset.m=b.dataset.m;segM.forEach(x=>x.setAttribute('aria-pressed',String(x===b)));placeThumb(b.closest('.seg'))}));
+const qb=document.getElementById('quiet');
+qb.addEventListener('click',()=>{const on=!mock.classList.contains('quiet');mock.classList.toggle('quiet',on);qb.setAttribute('aria-pressed',String(on))});
+
+/* latency */
+const lanes=document.getElementById('lanes');
+const segL=[...document.querySelectorAll('button[data-l]')];
+function setLag(k){lanes.style.setProperty('--lag',k==='fix'?'-3.61s':'-3.4s');segL.forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.l===k)));placeThumb(segL[0].closest('.seg'))}
+segL.forEach(b=>b.addEventListener('click',()=>setLag(b.dataset.l)));
+setLag('now');placeAll();
+
+/* toc highlight */
+const tl=[...document.querySelectorAll('.toc a')];
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){tl.forEach(a=>{const on=a.getAttribute('href')==='#'+e.target.id;a.classList.toggle('on',on);if(on&&a.parentElement.scrollWidth>a.parentElement.clientWidth)a.parentElement.scrollTo({left:a.offsetLeft-40,behavior:reduce?'auto':'smooth'})})}})},{rootMargin:'-30% 0px -60% 0px'});
+tl.forEach(a=>{const s=document.querySelector(a.getAttribute('href'));if(s)io.observe(s)});
+
+/* frame loop canvas */
+const cv=document.getElementById('cv'),ctx=cv.getContext('2d'),W=cv.width,H=cv.height;
+const off=document.createElement('canvas');off.width=W;off.height=H;const oc=off.getContext('2d');
+function rr(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath()}
+function scene(c,t){
+  const hy=H*.46,g=c.createLinearGradient(0,0,0,hy);g.addColorStop(0,'#18253d');g.addColorStop(1,'#4a6290');c.fillStyle=g;c.fillRect(0,0,W,H);
+  c.fillStyle='#151a23';c.fillRect(0,hy,W,H);
+  c.fillStyle='#2c3b5a';[[0,30,60,70],[62,50,44,46],[300,44,46,52],[348,20,52,80]].forEach(r=>c.fillRect(r[0],r[1],r[2],r[3]));
+  c.fillStyle='rgba(255,217,138,.5)';for(let x=4;x<56;x+=8)for(let y=36;y<96;y+=10)c.fillRect(x,y,3,4);for(let x=352;x<396;x+=8)for(let y=26;y<96;y+=10)c.fillRect(x,y,3,4);
+  c.fillStyle='#2a313d';c.beginPath();c.moveTo(70,H);c.lineTo(190,hy);c.lineTo(214,hy);c.lineTo(330,H);c.fill();
+  c.strokeStyle='rgba(207,214,226,.55)';c.lineWidth=2;
+  for(let i=0;i<8;i++){const s=((i/8)+t*0.5)%1,s2=Math.min(1,s+0.05),p=v=>v*v;
+    [[140,197],[260,207]].forEach(([bx,tx])=>{c.beginPath();c.moveTo(tx+(bx-tx)*p(s),hy+(H-hy)*p(s));c.lineTo(tx+(bx-tx)*p(s2),hy+(H-hy)*p(s2));c.stroke()})}
+  [[0.15,-0.35,'#c84b4b'],[0.55,0.3,'#dfe5ee'],[0.85,-0.1,'#9aa6b8']].forEach(([o,l,col])=>{const s=(o+t*0.18)%1,ss=0.25+0.55*s,y=hy+(H-hy)*ss*ss,w=10+40*ss*ss,x=202+l*120*ss*ss;c.fillStyle=col;rr(c,x-w/2,y-w*.35,w,w*.7,w*.15);c.fill()});
+  c.fillStyle='rgba(77,163,255,.32)';c.beginPath();c.moveTo(186,160);c.lineTo(214,160);c.lineTo(214,112);c.lineTo(242,98);c.lineTo(236,92);c.lineTo(204,108);c.fill();
+  c.fillStyle='#4da3ff';c.beginPath();c.moveTo(226,74);c.lineTo(242,74);c.lineTo(242,67);c.lineTo(256,78);c.lineTo(242,89);c.lineTo(242,82);c.lineTo(226,82);c.fill();
+  c.fillStyle='rgba(159,180,214,.18)';c.beginPath();c.ellipse(200,190,40,5,0,0,Math.PI*2);c.fill();
+  c.fillStyle='#e9edf3';rr(c,176,150,48,34,10);c.fill();c.fillStyle='#2a3242';rr(c,185,154,30,11,4);c.fill();
+  c.fillStyle='#ff4d4d';c.fillRect(179,175,10,3);c.fillRect(211,175,10,3);
+}
+const N=new Float32Array(W*H);function reseed(){for(let i=0;i<N.length;i++)N[i]=Math.random()*255}
+reseed();
+let t=0,step=0,ph=0,playing=!reduce;
+const stg=document.getElementById('stg'),lis=[...document.querySelectorAll('#steps li')];
+const names=['1 · Last frame','2 · Add noise','3 · Denoise with fresh features','4 · New frame'];
+function ease(x){return x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2}
+function render(){
+  const tt=step>=2?t+0.12:t;oc.clearRect(0,0,W,H);scene(oc,tt);
+  let a=0;if(step===1)a=0.72*ease(Math.min(1,ph));else if(step===2)a=0.72*(1-ease(Math.min(1,ph)));
+  if(a<=0.001){ctx.drawImage(off,0,0);return}
+  const img=oc.getImageData(0,0,W,H),d=img.data;
+  for(let i=0,j=0;i<d.length;i+=4,j++){const n=N[j];d[i]=d[i]*(1-a)+n*a;d[i+1]=d[i+1]*(1-a)+n*a;d[i+2]=d[i+2]*(1-a)+n*a}
+  ctx.putImageData(img,0,0);
+}
+function setStep(s){step=s;ph=0;if(s===0){t+=0.12;reseed()}stg.textContent=names[s];lis.forEach((l,i)=>l.classList.toggle('on',i===s))}
+let last=0;
+function loop(ts){if(playing){const dt=Math.min(64,ts-last);ph+=dt/(step===0||step===3?1500:1200);if(ph>=1)setStep((step+1)%4)}last=ts;const li=lis[step];if(li)li.style.setProperty('--p',Math.min(1,ph).toFixed(3));render();requestAnimationFrame(loop)}
+requestAnimationFrame(t0=>{last=t0;loop(t0)});
+const pbtn=document.getElementById('play');
+function syncPlay(){pbtn.textContent=playing?'Pause':'Play';pbtn.setAttribute('aria-pressed',String(playing))}
+pbtn.addEventListener('click',()=>{playing=!playing;syncPlay()});
+document.getElementById('stepb').addEventListener('click',()=>{playing=false;syncPlay();setStep((step+1)%4);ph=step===2?0.55:1});
+syncPlay();
+}
+</script>
+</body>
+</html>
